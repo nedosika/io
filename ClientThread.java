@@ -38,8 +38,9 @@ public class ClientThread extends Thread {
 		System.out.println("[" + this.c.getLogin() + "]: " + this.c.getMessage());
 		Server.getChatHistory().addMessage(this.c);
 	    } else {
-		//outputStream.writeObject(Server.getChatHistory().getHistory());
-                //System.out.println("history = " + Server.getChatHistory().getHistory().size());
+                for(Message message : Server.getChatHistory().getHistory()){
+                    outputStream.writeObject(message);
+                }
 		this.broadcast(Server.getUserList().getClientsList(), new Message("Server-Bot", "The user " + login + " has been connect"));
 	    }
 	    Server.getUserList().addUser(login, socket, outputStream, inputStream);
@@ -90,12 +91,12 @@ public class ClientThread extends Thread {
 		} else if (! c.getMessage().equals(Config.HELLO_MESSAGE)) {
 		    System.out.println("[" + login + "]: " + c.getMessage());
 		    Server.getChatHistory().addMessage(this.c);
-
 		} else {
-		    outputStream.writeObject(Server.getChatHistory());
+                    for(Message message : Server.getChatHistory().getHistory()){
+                        outputStream.writeObject(message);
+                    }
 		    this.broadcast(Server.getUserList().getClientsList(), new Message("Server-Bot", "The user " + login + " has been connect"));
 		}
-
                 this.c.setOnlineUsers(Server.getUserList().getUsers());
 
 		if (! (c instanceof Ping) && ! c.getMessage().equals(Config.HELLO_MESSAGE)) {
