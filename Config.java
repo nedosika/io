@@ -16,7 +16,9 @@ public class Config {
         try {
             propertiesFile = new FileInputStream(PROPERTIES_FILE);
             properties.load(propertiesFile);
-            PORT  = Integer.parseInt(properties.getProperty("PORT"));
+            PORT = Integer.parseInt(properties.getProperty("PORT"));
+            HISTORY_LENGTH = Integer.parseInt(properties.getProperty("HISTORY_LENGTH"));
+            HELLO_MESSAGE = properties.getProperty("HELLO_MESSAGE");
         } catch (FileNotFoundException ex) {
             System.err.println("Properties config file not found");
         } catch (IOException ex) {
