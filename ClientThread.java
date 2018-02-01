@@ -34,12 +34,12 @@ public class ClientThread extends Thread {
 	    this.c = (Message) inputStream.readObject();
             this.login = this.c.getLogin();
 
-
 	    if (! this.c.getMessage().equals(Config.HELLO_MESSAGE)) {
 		System.out.println("[" + this.c.getLogin() + "]: " + this.c.getMessage());
 		Server.getChatHistory().addMessage(this.c);
 	    } else {
-		outputStream.writeObject(Server.getChatHistory());
+		//outputStream.writeObject(Server.getChatHistory().getHistory());
+                //System.out.println("history = " + Server.getChatHistory().getHistory().size());
 		this.broadcast(Server.getUserList().getClientsList(), new Message("Server-Bot", "The user " + login + " has been connect"));
 	    }
 	    Server.getUserList().addUser(login, socket, outputStream, inputStream);
@@ -115,7 +115,6 @@ public class ClientThread extends Thread {
 	    e.printStackTrace();
 	}
     }
-
 
     private void broadcast(ArrayList<Client> clientsArrayList, Message message) {
 	try {

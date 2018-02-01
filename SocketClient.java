@@ -10,7 +10,7 @@ public class SocketClient {
     static Socket socket = null;
 
     public static void main( String[] args ) {
-        System.out.println("Вас приветствует клиент чата!\n");
+        System.out.println("Вас приветствует клиент чата!");
         System.out.println("Введите свой ник и нажмите \"Enter\"");
 
         // Создаем поток для чтения с клавиатуры
@@ -35,6 +35,8 @@ public class SocketClient {
                 ObjectInputStream objectInputStream = new ObjectInputStream( inputStream );
 
                 new ServerListenerThread( objectOutputStream, objectInputStream );
+
+                objectOutputStream.writeObject( new Message( userName, "User join to the chat(Auto-message)" ) );
 
                 // Создаем поток для чтения с клавиатуры
                 String message = null;

@@ -8,7 +8,7 @@ public class UsersList {
     private Map<String, Client> onlineUsers = new HashMap<String, Client>();
 
     public void addUser(String login, Socket socket, ObjectOutputStream oos, ObjectInputStream ois) {
-        System.out.println( login +" connected" );
+        System.out.println( login + " connected" );
 
         if (!this.onlineUsers.containsKey(login)) {
             this.onlineUsers.put(login , new Client(socket, oos, ois));
