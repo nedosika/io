@@ -88,7 +88,7 @@ public class ClientThread extends Thread {
                     this.inPacks++;
 		    System.out.println(this.inPacks + " in");
 
-		} else if (! c.getMessage().equals(Config.HELLO_MESSAGE)) {
+		} else if (! c.getMessage().equals(Config.HELLO_MESSAGE) && ! c.getMessage().equals(Config.END_MESSAGE)) {
 		    System.out.println("[" + login + "]: " + c.getMessage());
 		    Server.getChatHistory().addMessage(this.c);
 		} else {
@@ -100,7 +100,7 @@ public class ClientThread extends Thread {
                 this.c.setOnlineUsers(Server.getUserList().getUsers());
 
 		if (! (c instanceof Ping) && ! c.getMessage().equals(Config.HELLO_MESSAGE)) {
-                    if (c.getMessage().equals("//end")){
+                    if (c.getMessage().equals(Config.END_MESSAGE)){
                         System.out.println(login + " disconnected!");
                         Server.getUserList().deleteUser(login);
                         broadcast(Server.getUserList().getClientsList(), new Message("Server-Bot", "The user " + login + " has been dissconnected!", Server.getUserList().getUsers()));

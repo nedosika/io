@@ -8,17 +8,19 @@ public class Server {
     private static ChatHistory chatHistory = new ChatHistory();
 
     public static void main(String[] args) {
-	try {
+        try {
             //Создаем слушатель
 	    ServerSocket socketListener = new ServerSocket(Config.PORT);
             System.out.println("Server started on " + Config.PORT );
+            new ServerConsole();
+
 	    while (true) {
 		Socket client = null;
 		while (client == null) {
 		    client = socketListener.accept();
 		}
 		new ClientThread(client); //Создаем новый поток, которому передаем сокет
-	    }
+            }
 	} catch (SocketException e) {
 	    System.err.println("Socket exception");
 	    e.printStackTrace();
@@ -33,6 +35,10 @@ public class Server {
     }
 
     public synchronized static ChatHistory getChatHistory() {
-	return chatHistory;
+        return chatHistory;
+    }
+
+    public synchronized static void stopServer(){
+        System.exit(0);
     }
 }

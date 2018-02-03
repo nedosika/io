@@ -40,7 +40,7 @@ public class SocketClient {
 
                 // Создаем поток для чтения с клавиатуры
                 String message = null;
-                System.out.println("Наберите сообщение и нажмите \"Enter\"\n");
+                System.out.println("Наберите сообщение и нажмите \"Enter\"");
 
                 while (true) { // Бесконечный цикл
                     message = keyboard.readLine(); // ждем пока пользователь введет что-то и нажмет кнопку Enter.

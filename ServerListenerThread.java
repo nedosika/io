@@ -26,7 +26,7 @@ public class ServerListenerThread implements Runnable {
                     System.out.println("[ " + messageIn.getDate().toString() + " ] " + messageIn.getLogin() + " : " + messageIn.getMessage() );
                 }
             }
-        } 
+        }
         catch ( SocketException e ) { e.getMessage(); }
         catch ( ClassNotFoundException e ) { e.getMessage(); }
         catch ( IOException e ) { e.getMessage(); }
