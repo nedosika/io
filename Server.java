@@ -10,7 +10,7 @@ public class Server {
     public static void main(String[] args) {
         try {
             //Создаем слушатель
-	    ServerSocket socketListener = new ServerSocket(Config.PORT);
+            ServerSocket socketListener = new ServerSocket(Config.PORT);
             System.out.println("Server started on " + Config.PORT );
             new ServerConsole();
 
@@ -30,7 +30,7 @@ public class Server {
 	}
     }
 
-    public synchronized static UsersList getUserList() {
+    public synchronized static UsersList getUsersList() {
 	return list;
     }
 

@@ -41,12 +41,12 @@ public class ClientThread extends Thread {
                 for(Message message : Server.getChatHistory().getHistory()){
                     outputStream.writeObject(message);
                 }
-		this.broadcast(Server.getUserList().getClientsList(), new Message("Server-Bot", "The user " + login + " has been connect"));
+		this.broadcast(Server.getUsersList().getClientsList(), new Message("Server-Bot", "The user " + login + " has been connect"));
 	    }
-	    Server.getUserList().addUser(login, socket, outputStream, inputStream);
+	    Server.getUsersList().addUser(login, socket, outputStream, inputStream);
 
-            this.c.setOnlineUsers(Server.getUserList().getUsers());
-	    this.broadcast(Server.getUserList().getClientsList(), this.c);
+            this.c.setOnlineUsers(Server.getUsersList().getUsers());
+	    this.broadcast(Server.getUsersList().getClientsList(), this.c);
 
 	    this.timer = new Timer(DELAY, new ActionListener() {
 		@Override
@@ -62,8 +62,8 @@ public class ClientThread extends Thread {
 		    } catch (SocketException ex1) {
 			System.out.println("packages not clash");
 			System.out.println(login + " disconnected!");
-			Server.getUserList().deleteUser(login);
-                        broadcast(Server.getUserList().getClientsList(), new Message("Server-Bot", "The user " + login + " has been disconnect", Server.getUserList().getUsers()));
+			Server.getUsersList().deleteUser(login);
+                        broadcast(Server.getUsersList().getClientsList(), new Message("Server-Bot", "The user " + login + " has been disconnect", Server.getUsersList().getUsers()));
 			flag = true;
                         timer.stop();
 		    } catch (IOException ex2) {
@@ -95,28 +95,28 @@ public class ClientThread extends Thread {
                     for(Message message : Server.getChatHistory().getHistory()){
                         outputStream.writeObject(message);
                     }
-		    this.broadcast(Server.getUserList().getClientsList(), new Message("Server-Bot", "The user " + login + " has been connect"));
+		    this.broadcast(Server.getUsersList().getClientsList(), new Message("Server-Bot", "The user " + login + " has been connect"));
 		}
-                this.c.setOnlineUsers(Server.getUserList().getUsers());
+                this.c.setOnlineUsers(Server.getUsersList().getUsers());
 
 		if (! (c instanceof Ping) && ! c.getMessage().equals(Config.HELLO_MESSAGE)) {
                     if (c.getMessage().equals(Config.END_MESSAGE)){
                         System.out.println(login + " disconnected!");
-                        Server.getUserList().deleteUser(login);
-                        broadcast(Server.getUserList().getClientsList(), new Message("Server-Bot", "The user " + login + " has been dissconnected!", Server.getUserList().getUsers()));
+                        Server.getUsersList().deleteUser(login);
+                        broadcast(Server.getUsersList().getClientsList(), new Message("Server-Bot", "The user " + login + " has been disconnected!", Server.getUsersList().getUsers()));
                         timer.stop();
                         flag = true;
                     } else {
 		        System.out.println("Send broadcast Message: " + c.getMessage() );
-		        this.broadcast(Server.getUserList().getClientsList(), this.c);
+		        this.broadcast(Server.getUsersList().getClientsList(), this.c);
                     }
 		}
 	    }
 
 	} catch (SocketException e) {
 	    System.out.println(login + " disconnected!");
-	    Server.getUserList().deleteUser(login);
-            broadcast(Server.getUserList().getClientsList(), new Message("Server-Bot", "The user " + login + " has been disconnect", Server.getUserList().getUsers()));
+	    Server.getUsersList().deleteUser(login);
+            broadcast(Server.getUsersList().getClientsList(), new Message("Server-Bot", "The user " + login + " has been disconnect", Server.getUsersList().getUsers()));
             this.timer.stop();
 	} catch (IOException e) {
 	    e.printStackTrace();
@@ -132,8 +132,8 @@ public class ClientThread extends Thread {
 	    }
 	} catch (SocketException e) {
 	    System.out.println("in broadcast: " + login + " disconnected!");
-	    Server.getUserList().deleteUser(login);
-	    this.broadcast(Server.getUserList().getClientsList(), new Message("Server-Bot", "The user " + login + " has been disconnected", Server.getUserList().getUsers()));
+	    Server.getUsersList().deleteUser(login);
+	    this.broadcast(Server.getUsersList().getClientsList(), new Message("Server-Bot", "The user " + login + " has been disconnected", Server.getUsersList().getUsers()));
 	    timer.stop();
 	} catch (IOException e) {
 	    e.printStackTrace();
