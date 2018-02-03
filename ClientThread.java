@@ -100,8 +100,16 @@ public class ClientThread extends Thread {
                 this.c.setOnlineUsers(Server.getUserList().getUsers());
 
 		if (! (c instanceof Ping) && ! c.getMessage().equals(Config.HELLO_MESSAGE)) {
-		    System.out.println("Send broadcast Message: " + c.getMessage() );
-		    this.broadcast(Server.getUserList().getClientsList(), this.c);
+                    if (c.getMessage().equals("//end")){
+                        System.out.println(login + " disconnected!");
+                        Server.getUserList().deleteUser(login);
+                        broadcast(Server.getUserList().getClientsList(), new Message("Server-Bot", "The user " + login + " has been dissconnected!", Server.getUserList().getUsers()));
+                        timer.stop();
+                        flag = true;
+                    } else {
+		        System.out.println("Send broadcast Message: " + c.getMessage() );
+		        this.broadcast(Server.getUserList().getClientsList(), this.c);
+                    }
 		}
 	    }
 
@@ -126,7 +134,6 @@ public class ClientThread extends Thread {
 	    System.out.println("in broadcast: " + login + " disconnected!");
 	    Server.getUserList().deleteUser(login);
 	    this.broadcast(Server.getUserList().getClientsList(), new Message("Server-Bot", "The user " + login + " has been disconnected", Server.getUserList().getUsers()));
-
 	    timer.stop();
 	} catch (IOException e) {
 	    e.printStackTrace();

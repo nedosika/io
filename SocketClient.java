@@ -45,6 +45,9 @@ public class SocketClient {
                 while (true) { // Бесконечный цикл
                     message = keyboard.readLine(); // ждем пока пользователь введет что-то и нажмет кнопку Enter.
                     objectOutputStream.writeObject( new Message( userName, message ) ); // отсылаем введенную строку текста серверу.
+                    if (message.equals("//end")){
+                        break;
+                    }
                 }
             } catch ( Exception e ) { e.printStackTrace(); }
         } finally {

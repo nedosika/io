@@ -35,5 +35,4 @@ public class Server {
     public synchronized static ChatHistory getChatHistory() {
 	return chatHistory;
     }
-
 }
