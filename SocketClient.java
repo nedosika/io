@@ -26,13 +26,8 @@ public class SocketClient {
                 InetAddress ipAddress = InetAddress.getByName( address ); // создаем объект который отображает вышеописанный IP-адрес
                 socket = new Socket( ipAddress, serverPort ); // создаем сокет используя IP-адрес и порт сервера
 
-                // Берем входной и выходной потоки сокета, теперь можем получать и отсылать данные клиентом
-                InputStream inputStream = socket.getInputStream();
-                OutputStream outputStream = socket.getOutputStream();
-
-                // Конвертируем потоки в другой тип, чтоб легче обрабатывать текстовые сообщения
-                ObjectOutputStream objectOutputStream = new ObjectOutputStream( outputStream );
-                ObjectInputStream objectInputStream = new ObjectInputStream( inputStream );
+                ObjectOutputStream objectOutputStream = new ObjectOutputStream( socket.getOutputStream() );
+                ObjectInputStream objectInputStream = new ObjectInputStream(  socket.getInputStream() );
 
                 new ServerListenerThread( objectOutputStream, objectInputStream );
 
@@ -43,8 +38,15 @@ public class SocketClient {
                 System.out.println("Наберите сообщение и нажмите \"Enter\"");
 
                 while (true) { // Бесконечный цикл
+
                     message = keyboard.readLine(); // ждем пока пользователь введет что-то и нажмет кнопку Enter.
-                    objectOutputStream.writeObject( new Message( userName, message ) ); // отсылаем введенную строку текста серверу.
+
+                    if (message.equals("//list")){
+                        for (String user : ServerListenerThread.usersList){System.out.println(user);}
+                    } else {
+                        objectOutputStream.writeObject( new Message( userName, message ) ); // отсылаем введенную строку текста серверу.
+                    }
+
                     if (message.equals("//end")){
                         break;
                     }

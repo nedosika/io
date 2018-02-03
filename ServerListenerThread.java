@@ -5,6 +5,7 @@ public class ServerListenerThread implements Runnable {
     private Thread thread = null;
     private ObjectOutputStream objectOutputStream = null;
     private ObjectInputStream objectInputStream = null;
+    public static String[] usersList;
 
     public ServerListenerThread( ObjectOutputStream objectOutputStream, ObjectInputStream objectInputStream ) {
         this.objectOutputStream = objectOutputStream;
@@ -24,6 +25,7 @@ public class ServerListenerThread implements Runnable {
                     objectOutputStream.writeObject( new Ping() );
                 } else {
                     System.out.println("[ " + messageIn.getDate().toString() + " ] " + messageIn.getLogin() + " : " + messageIn.getMessage() );
+                    usersList = messageIn.getUsers();
                 }
             }
         }

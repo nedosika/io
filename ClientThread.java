@@ -22,8 +22,8 @@ public class ClientThread extends Thread {
     private Timer timer;
 
     public ClientThread(Socket socket) {
-	this.socket = socket;
-	this.start();
+        this.socket = socket;
+        this.start();
     }
 
     public void run() {
@@ -66,7 +66,7 @@ public class ClientThread extends Thread {
                         broadcast(Server.getUserList().getClientsList(), new Message("Server-Bot", "The user " + login + " has been disconnect", Server.getUserList().getUsers()));
 			flag = true;
                         timer.stop();
-		    }  catch (IOException ex2) {
+		    } catch (IOException ex2) {
                         ex2.printStackTrace();
                     }
                 }

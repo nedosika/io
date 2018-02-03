@@ -38,7 +38,7 @@ public class Server {
         return chatHistory;
     }
 
-    public synchronized static void stopServer(){
+    public static void stopServer(){
         System.exit(0);
     }
 }
