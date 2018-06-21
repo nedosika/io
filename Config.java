@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class Config {
-    private static final String PROPERTIES_FILE = "./server.cfg";
+    private static final String PROPERTIES_FILE = "./src/server.cfg";
 
     public static int PORT;
     public static int HISTORY_LENGTH;

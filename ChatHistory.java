@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class ChatHistory implements Serializable {
+
     private List<Message> history;
 
     public ChatHistory() {
@@ -10,9 +11,7 @@ public class ChatHistory implements Serializable {
     }
 
     public void addMessage(Message message){
-        if (this.history.size() > Config.HISTORY_LENGTH){
-            this.history.remove(0);
-        }
+        if (this.history.size() > Config.HISTORY_LENGTH) this.history.remove(0);
 
         this.history.add(message);
     }
@@ -20,5 +19,4 @@ public class ChatHistory implements Serializable {
     public List<Message> getHistory(){
         return this.history;
     }
-
 }

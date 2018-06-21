@@ -43,7 +43,6 @@ public class SocketClient {
 
                     if (message.equals("//list")){
                         for (String user : ServerListenerThread.usersList){System.out.println(user);}
-                        message.
                     } else {
                         objectOutputStream.writeObject( new Message( userName, message ) ); // отсылаем введенную строку текста серверу.
                     }
