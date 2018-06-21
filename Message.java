@@ -5,6 +5,8 @@ import java.sql.Time;
 public class Message implements Serializable {
 
     private String login;
+    private Client sender;
+    private Client recipient;
     private String message;
     private String[] users;
     private Date time;
@@ -44,4 +46,8 @@ public class Message implements Serializable {
         Time tm = new Time(this.time.getTime());
         return tm.toString();
     }
+
+    public Client getSender() { return sender; }
+
+    public void setSender(Client sender) { this.sender = sender; }
 }

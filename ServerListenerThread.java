@@ -24,7 +24,7 @@ public class ServerListenerThread implements Runnable {
                     Ping ping = (Ping) messageIn;
                     objectOutputStream.writeObject( new Ping() );
                 } else {
-                    System.out.println("[ " + messageIn.getDate().toString() + " ] " + messageIn.getLogin() + " : " + messageIn.getMessage() );
+                    System.out.println(messageIn.getDate().toString() + "{" + 0 + "]" + messageIn.getLogin() + " : " + messageIn.getMessage() );
                     usersList = messageIn.getUsers();
                 }
             }
